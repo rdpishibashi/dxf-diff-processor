@@ -1,0 +1,232 @@
+[     UTC     ] Logs for dxf-diff-proceappr-gbzaseesxqpcsfquastxrx.streamlit.app/
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+[06:03:14] 🖥 Provisioning machine...
+
+[06:03:14] 🎛 Preparing system...
+
+[06:03:14] ⛓ Spinning up manager process...
+
+[06:03:14] 🚀 Starting up repository: 'dxf-diff-processor', branch: 'main', main module: 'app.py'
+
+[06:03:14] 🐙 Cloning repository...
+
+[06:03:14] 🐙 Cloning into '/mount/src/dxf-diff-processor'...
+
+[06:03:14] 🐙 Cloned repository!
+
+[06:03:14] 🐙 Pulling code changes from Github...
+
+[06:03:15] 📦 Processing dependencies...
+
+Check if streamlit is installed
+
+cat: /mount/admin/install_path: No such file or directory
+
+
+──────────────────────────────── Installing Streamlit ──────────────────────────────────
+
+
+Using uv pip install.
+
+Using Python 3.13.5 environment at /home/adminuser/venv
+
+Resolved 37 packages in 390ms
+
+Prepared 37 packages in 1.76s
+
+Installed 37 packages in 74ms
+
+ + altair==5.5.0
+
+ + attrs==25.3.0
+
+ + blinker==1.9.0
+
+ + cachetools==6.1.0
+
+ + certifi==2025.8.3
+
+ + charset-normalizer==3.4.3
+
+ + click==8.2.1
+
+ + gitdb==4.0.12
+
+ + gitpython==3.1.45
+
+ + idna==3.10
+
+ + jinja2==3.1.6
+
+ +[2025-08-25 06:03:17.591893]  jsonschema==4.25.1
+
+ + jsonschema-specifications==2025.4.1
+
+ + markupsafe==3.0.2
+
+ + narwhals==2.1.2
+
+ + numpy==2.3.2
+
+ + packaging==25.0
+
+ + pandas==2.3.2
+
+ + pillow==[2025-08-25 06:03:17.592143] 11.3.0
+
+ + protobuf==6.32.0
+
+ + pyarrow==21.0.0
+
+ + pydeck==0.9.1
+
+ + python-dateutil==2.9.0.post0
+
+ + pytz==2025.2
+
+ +[2025-08-25 06:03:17.592382]  referencing==0.36.2
+
+ + requests==2.32.5
+
+ + rpds-py==0.27.0
+
+ + six==1.17.0
+
+ + smmap==5.0.2
+
+ + streamlit==1.48.1
+
+ + tenacity==9.1.2
+
+ + toml==0.10.2
+
+ + tornado==[2025-08-25 06:03:17.592571] 6.5.2
+
+ + typing-extensions==4.14.1
+
+ + tzdata==2025.2
+
+ + urllib3==2.5.0
+
+ + watchdog==6.0.0
+
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+
+[06:03:18] 📦 Processed dependencies!
+
+cat: /mount/admin/install_path: No such file or directory
+
+
+
+
+2025-08-25 06:03:27.130 Uncaught app execution
+
+Traceback (most recent call last):
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 128, in exec_func_with_error_handling
+
+    result = func()
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 667, in code_to_exec
+
+    _mpa_v1(self._main_script_path)
+
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 165, in _mpa_v1
+
+    page.run()
+
+    ~~~~~~~~^^
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/navigation/page.py", line 300, in run
+
+    exec(code, module.__dict__)  # noqa: S102
+
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/mount/src/dxf-diff-processor/app.py", line 14, in <module>
+
+    from pages import dxf_processor_main
+
+  File "/mount/src/dxf-diff-processor/pages/dxf_processor_main.py", line 11, in <module>
+
+    from core.processor import DXFProcessor
+
+  File "/mount/src/dxf-diff-processor/core/processor.py", line 13, in <module>
+
+    from utils.compare_labels import compare_labels_multi
+
+ModuleNotFoundError: No module named 'utils'
+
+2025-08-25 06:03:27.132 Uncaught app execution
+
+Traceback (most recent call last):
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 128, in exec_func_with_error_handling
+
+    result = func()
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 667, in code_to_exec
+
+    _mpa_v1(self._main_script_path)
+
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 165, in _mpa_v1
+
+    page.run()
+
+    ~~~~~~~~^^
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/navigation/page.py", line 300, in run
+
+    exec(code, module.__dict__)  # noqa: S102
+
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/mount/src/dxf-diff-processor/app.py", line 14, in <module>
+
+    from pages import dxf_processor_main
+
+ImportError: cannot import name 'dxf_processor_main' from 'pages' (/mount/src/dxf-diff-processor/pages/__init__.py)
+
+2025-08-25 06:03:35.805 Uncaught app execution
+
+Traceback (most recent call last):
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 128, in exec_func_with_error_handling
+
+    result = func()
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 667, in code_to_exec
+
+    _mpa_v1(self._main_script_path)
+
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 165, in _mpa_v1
+
+    page.run()
+
+    ~~~~~~~~^^
+
+  File "/home/adminuser/venv/lib/python3.13/site-packages/streamlit/navigation/page.py", line 300, in run
+
+    exec(code, module.__dict__)  # noqa: S102
+
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/mount/src/dxf-diff-processor/pages/dxf_processor_main.py", line 11, in <module>
+
+    from core.processor import DXFProcessor
+
+  File "/mount/src/dxf-diff-processor/core/processor.py", line 13, in <module>
+
+    from utils.compare_labels import compare_labels_multi
+
+ModuleNotFoundError: No module named 'utils'

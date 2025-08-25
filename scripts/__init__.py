@@ -1,0 +1,1 @@
+"""Scripts module for DXF-diff-processor standalone version"""

@@ -27,14 +27,21 @@ class DXFProcessingConfig:
     def from_environment(cls) -> 'DXFProcessingConfig':
         """Create configuration from environment variables"""
         
-        # Get paths from environment or use defaults
-        tools_dir = os.getenv(
-            'DXF_TOOLS_DIR',
-            '/Users/ryozo/Dropbox/Client/ULVAC/ElectricDesignManagement/Tools'
-        )
+        # Check if we're running in Streamlit Cloud or local environment
+        current_dir = Path(__file__).parent.parent.absolute()
         
-        diff_script = Path(tools_dir) / 'DXF-viewer' / 'diff_label_processor.py'
-        dxf_script = Path(tools_dir) / 'DXF-viewer' / 'dxf_processor.py'
+        # First try local scripts (for Streamlit Cloud standalone deployment)
+        diff_script = current_dir / 'scripts' / 'diff_label_processor.py'
+        dxf_script = current_dir / 'scripts' / 'dxf_processor.py'
+        
+        # If not found, try original paths (for local development)
+        if not diff_script.exists() or not dxf_script.exists():
+            tools_dir = os.getenv(
+                'DXF_TOOLS_DIR',
+                '/Users/ryozo/Dropbox/Client/ULVAC/ElectricDesignManagement/Tools'
+            )
+            diff_script = Path(tools_dir) / 'DXF-viewer' / 'diff_label_processor.py'
+            dxf_script = Path(tools_dir) / 'DXF-viewer' / 'dxf_processor.py'
         
         return cls(
             diff_processor_script=diff_script,
@@ -45,6 +52,11 @@ class DXFProcessingConfig:
     
     def validate(self) -> None:
         """Validate configuration"""
+        # In Streamlit Cloud, external scripts may not be available initially
+        # Skip validation if running in cloud environment (no local file system access)
+        if os.getenv('STREAMLIT_SHARING_MODE') or 'streamlit.app' in os.getenv('SERVER_NAME', ''):
+            return
+            
         if not self.diff_processor_script.exists():
             raise FileNotFoundError(f"diff_label_processor.py not found: {self.diff_processor_script}")
         
