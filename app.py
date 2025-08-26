@@ -2,38 +2,67 @@ import streamlit as st
 import sys
 from pathlib import Path
 
-# Add both DXF-tools and DXF-viewer to the Python path
-# Use absolute paths to ensure reliability
-dxf_tools_path = Path("/Users/ryozo/Dropbox/Client/ULVAC/ElectricDesignManagement/Tools/DXF-tools")
-dxf_viewer_path = Path("/Users/ryozo/Dropbox/Client/ULVAC/ElectricDesignManagement/Tools/DXF-viewer")
+# Add paths for imports
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
 
-sys.path.insert(0, str(dxf_tools_path))
-sys.path.insert(0, str(dxf_viewer_path))
-
-# Import page modules
-from pages import dxf_processor_main
+from core.processor import DXFProcessor
+from core.models import SessionState
+from ui.components import FileUploadComponent, ProcessingComponent, DownloadComponent
 
 st.set_page_config(
-    page_title="DXF Processing Suite",
+    page_title="DXF Diff Processor",
     page_icon="🔧",
     layout="wide",
-    initial_sidebar_state="collapsed"  # Hide sidebar
 )
 
-# Hide sidebar completely with CSS
-st.markdown("""
-<style>
-    .css-1d391kg {
-        display: none;
-    }
-    .css-1y4p8pa {
-        padding-top: 0rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-bottom: 10rem;
-    }
-</style>
-""", unsafe_allow_html=True)
+def app():
+    """Main application entry point"""
+    st.title('DXF Diff Processor')
+    st.write('２つのDXFファイルのラベルを比較し、その差分をハイライトして処理します。')
+    
+    # プログラム説明
+    with st.expander("ℹ️ プログラム説明", expanded=False):
+        help_text = [
+            "このツールは、複数のDXFファイルペアからラベル比較、差分処理、アーカイブ作成を一括で実行します。",
+            "",
+            "**使用手順：**",
+            "1. 各ファイルペアを登録してください（最大5ペア）",
+            "2. 「処理を開始」ボタンをクリックして処理を実行します",
+            "3. 処理完了後、結果をダウンロードできます",
+            "",
+            "**処理内容：**",
+            "- ラベル比較をまとめたExcelファイル生成",
+            "- ラベル差分リストファイルの生成",
+            "- 差分ラベルの処理とハイライト",
+            "- 結果のアーカイブ（ZIP）作成",
+            "",
+            "**出力ファイル：**",
+            "- ラベル差分比較結果Excelふぁいる",
+            "- ラベル差分リストファイル", 
+            "- 差分処理済みDXFファイル",
+            "- 全ファイルを含むZIPアーカイブ"
+        ]
+        
+        st.info("\n".join(help_text))
+    
+    # Initialize processor
+    processor = DXFProcessor()
+    
+    # File upload component
+    file_pairs = FileUploadComponent.render()
+    
+    # Processing component
+    ProcessingComponent.render(
+        file_pairs=file_pairs,
+        processor_callback=lambda pairs, callback: processor.process_file_pairs(pairs, callback)
+    )
+    
+    # Download component (if processing is completed)
+    if SessionState.get_processing_completed():
+        results = SessionState.get_processing_results()
+        if results:
+            DownloadComponent.render(results)
 
-# Run the main application
-dxf_processor_main.app()
+if __name__ == "__main__":
+    app()

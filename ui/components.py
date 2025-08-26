@@ -64,7 +64,7 @@ class ProcessingComponent:
             st.info("処理を開始するには、少なくとも1つのファイルペアをアップロードしてください")
             return
         
-        st.header("処理対象")
+        st.subheader("処理対象")
         st.write(f"登録されたペア数： {len(file_pairs)}")
         
         # Display registered pairs
@@ -107,7 +107,7 @@ class DownloadComponent:
     @staticmethod
     def render(results: ProcessingResults) -> None:
         """Render download interface"""
-        st.header("処理結果")
+        st.subheader("処理結果")
         st.write("処理結果DXFファイルと関連データをダウンロードできます")
         
         successful_pairs = results.successful_pairs
