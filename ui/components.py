@@ -16,8 +16,8 @@ class FileUploadComponent:
     @staticmethod
     def render() -> List[FilePair]:
         """Render file upload interface and return valid file pairs"""
-        st.header("ファイルペア登録")
-        st.write("処理対象のDXFファイルペアをアップロードしてください")
+        st.subheader("ファイルペア登録")
+        st.write("最大5ペアのDXFファイルを登録できます")
         
         file_pairs = []
         
